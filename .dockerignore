@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+build/**/*
+.vscode
+config
+database
+migrations
+models
+/src/Infrastructure/pdfService/temp/*
+
+.env.example
+.env.local
+.env.development
+.env.production
