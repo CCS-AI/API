@@ -42,7 +42,7 @@ class UserService implements IUserService {
     }
 
 
-    public async createUser(user: User) {
+    public async createUser(user: User): Promise<User> {
         return await User.create({
             email: user.Email,
             password: user.Password,
@@ -55,7 +55,7 @@ class UserService implements IUserService {
         });
     }
 
-    public async updateUser(user: User) {
+    public async updateUser(user: User):Promise<void> {
         await User.update(
             {
                 email: user.Email,

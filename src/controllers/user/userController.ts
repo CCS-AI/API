@@ -1,14 +1,11 @@
-import { Controller, Get, Post } from '@overnightjs/core';
+import { Controller, Get } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Logger as consoleLog } from '@overnightjs/logger';
-import { compare } from 'bcrypt';
 import { Request, Response } from 'express';
 import { BAD_REQUEST, NOT_FOUND, OK } from 'http-status-codes';
-import { inject, injectable, container } from 'tsyringe';
-import { User } from '../../domains/identity/models';
+import { inject, injectable } from 'tsyringe';
 import { IUserService } from '../../domains/identity/services/userService';
 import { RouteMustAuth } from '../../Infrastructure/decorators/jwt';
-import { ValidateBody } from '../../Infrastructure/decorators/validations';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
 import { ILogger } from '../../Infrastructure/logging/ILogger';
 

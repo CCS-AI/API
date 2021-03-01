@@ -17,7 +17,6 @@ class User extends Model {
     public role: string;
     public phoneNumber: string;
     public birthDate: Date;
-    public createdDate: Date;
     public profileImg: string;
     public shouldResetPassword: boolean;
     public createdAt: Date;
