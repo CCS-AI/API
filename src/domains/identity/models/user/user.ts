@@ -11,7 +11,6 @@ class User extends Model {
     private email: string;
     private password: string;
 
-    public username: string;
     public firstName: string;
     public lastName: string;
     public role: string;
@@ -89,24 +88,24 @@ const attributes = {
         allowNull: false
     },
     role: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
     },
     phoneNumber: {
         field: 'phone_number',
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
     },
     birthDate: {
         field: 'birth_date',
-        type: DataTypes.DATE,
+        type: DataTypes.DATE
     },
     profileImg: {
         field: 'user_pic',
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUIDV4
     },
     shouldResetPassword: {
         field: 'should_reset_password',
         type: DataTypes.BOOLEAN
-    },
+    }
 };
 
 const initUser = (sequelize: Sequelize): void => {
@@ -115,7 +114,7 @@ const initUser = (sequelize: Sequelize): void => {
         tableName: 'users',
         hooks,
         paranoid: true,
-        timestamps:true,
+        timestamps: true
     });
 };
 

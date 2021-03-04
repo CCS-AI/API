@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { Lifecycle, scoped } from 'tsyringe';
-import {  User } from '../models/user/user';
+import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from './../../../controllers/admin/utils/index';
 
 export interface IUserService {
@@ -41,31 +41,28 @@ class UserService implements IUserService {
         return users;
     }
 
-
     public async createUser(user: User): Promise<User> {
         return await User.create({
             email: user.Email,
             password: user.Password,
-            username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
             role: user.role,
             phoneNumber: user.phoneNumber,
-            birthDate: user.birthDate,
+            birthDate: user.birthDate
         });
     }
 
-    public async updateUser(user: User):Promise<void> {
+    public async updateUser(user: User): Promise<void> {
         await User.update(
             {
                 email: user.Email,
                 password: user.Password,
-                username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 role: user.role,
                 phoneNumber: user.phoneNumber,
-                birthDate: user.birthDate,
+                birthDate: user.birthDate
             },
             {
                 where: { id: user.Id }

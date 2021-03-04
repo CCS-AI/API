@@ -12,10 +12,7 @@ import { ILogger } from '../../Infrastructure/logging/ILogger';
 @injectable()
 @Controller('api/user')
 export class UserController {
-    constructor(
-        @inject('IUserService') private userService: IUserService,
-        @inject('ILogger') private logger: ILogger,
-    ) {}
+    constructor(@inject('IUserService') private userService: IUserService, @inject('ILogger') private logger: ILogger) {}
 
     @Get('getByEmail/:email')
     private async get(req: Request, res: Response) {
@@ -46,13 +43,12 @@ export class UserController {
             return res.status(OK).json({
                 id: user.Id,
                 email: user.Email,
-                username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 role: user.role,
                 birthDate: user.birthDate,
                 phoneNumber: user.phoneNumber,
-                profileImg: user.profileImg,
+                profileImg: user.profileImg
             });
         } catch (error) {
             routeErrorHandling(error, req, res);
