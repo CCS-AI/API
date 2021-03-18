@@ -1,11 +1,10 @@
 import { Sequelize } from 'sequelize';
-import {
-    initUser,
-} from '../../../domains/identity/models';
+import { initPatient, initUser } from '../../../domains/identity/models';
 
 class identityDatabase {
     static initModels(sequelize: Sequelize) {
         initUser(sequelize);
+        initPatient(sequelize);
     }
 }
 
