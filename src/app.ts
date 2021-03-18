@@ -11,6 +11,7 @@ import { container } from 'tsyringe';
 import * as controllers from './controllers';
 
 import AuthService from './domains/identity/services/authService';
+import PatientMedicalFileService from './domains/identity/services/patientMedicalFileService';
 import PatientService from './domains/identity/services/patientService';
 import UserService from './domains/identity/services/userService';
 import Database from './Infrastructure/db/sequelize';
@@ -84,6 +85,9 @@ class App extends Server {
         });
         container.register('IPatientService', {
             useClass: PatientService
+        });
+        container.register('IPatientMedicalFileService', {
+            useClass: PatientMedicalFileService
         });
     }
 

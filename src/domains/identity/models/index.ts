@@ -1,3 +1,4 @@
 export * from './user/user';
 export * from './patient/patient';
 // export * from './user/userLogin';
+export * from './patientMedicalFile/patientMedicalFile';
