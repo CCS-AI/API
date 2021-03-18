@@ -18,7 +18,7 @@ export class UserController {
     private async get(req: Request, res: Response) {
         try {
             if (!req.params.email) return res.status(BAD_REQUEST).json('INVALID_EMAIL');
-
+            s;
             const user = await this.userService.getByEmail(req.params.email);
 
             return res.status(OK).json(user);
