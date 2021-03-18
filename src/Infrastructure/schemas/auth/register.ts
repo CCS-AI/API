@@ -8,7 +8,8 @@ export const registerSchema = {
         phoneNumber: { type: 'string' },
         birthDate: { type: 'string' },
         profileImg: { type: 'string' },
+        role: { type: 'string' }
     },
-    required: ['email', 'password','firstName','lastName'],
+    required: ['email', 'password', 'firstName', 'lastName', 'role'],
     type: 'object'
 };

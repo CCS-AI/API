@@ -34,12 +34,12 @@ class AuthController {
     @ValidateBody(registerSchema)
     private async register(req: Request, res: Response) {
         try {
-            const { email, password,firstName,lastName,birthDate,profileImg } = req.body;
+            const { email, password, firstName, lastName, birthDate, profileImg, role } = req.body;
 
             const user: User | null = await this.userService.getByEmail(email.trim().toLowerCase());
             if (user) return res.status(UNAUTHORIZED).send('EMAIL_ALREADY_EXISTS');
 
-            await this.userService.createUser(User.build({email,password,firstName,lastName,birthDate,profileImg}));
+            await this.userService.createUser(User.build({ email, password, firstName, lastName, birthDate, profileImg, role }));
             return res.status(OK).send('REGISTERED_SUCCESFULLY');
         } catch (error) {
             routeErrorHandling(error, req, res);
