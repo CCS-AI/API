@@ -9,7 +9,8 @@ const attributes = {
     id: {
         type: DataTypes.UUIDV4,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        defaultValue: Sequelize.literal('uuid_generate_v4()')
     },
     patientId: {
         field: 'patient_id',
@@ -22,7 +23,7 @@ const initPatientMedicalFile = (sequelize: Sequelize): void => {
     PatientMedicalFile.init(attributes, {
         sequelize,
         tableName: 'patient_medical_file',
-        timestamps: false
+        timestamps: true
     });
 };
 

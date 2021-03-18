@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b3598367-0f8c-41d6-8fad-74617cfd77fa",
+		"_postman_id": "a1ba4044-1ce2-46f3-8d73-e45b26a5e1fe",
 		"name": "CCS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -281,6 +281,139 @@
 							],
 							"path": [
 								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PatientMedicalFile",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/patientMedicalFile/e68062a8-ddf7-4a33-ae23-9228d1ce7d64",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"patientMedicalFile",
+								"e68062a8-ddf7-4a33-ae23-9228d1ce7d64"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"patientId\": \"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/patientMedicalFile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"patientMedicalFile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/patientMedicalFile/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"patientMedicalFile",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"e68062a8-ddf7-4a33-ae23-9228d1ce7d64\",\r\n    \"data\": {\r\n        \"address\": \"ariel\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/patientMedicalFile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"patientMedicalFile"
 							]
 						}
 					},
