@@ -11,6 +11,7 @@ import { container } from 'tsyringe';
 import * as controllers from './controllers';
 
 import AuthService from './domains/identity/services/authService';
+import PatientService from './domains/identity/services/patientService';
 import UserService from './domains/identity/services/userService';
 import Database from './Infrastructure/db/sequelize';
 import EmailService from './Infrastructure/emailService/emailService';
@@ -81,7 +82,9 @@ class App extends Server {
         container.register('IAuthService', {
             useClass: AuthService
         });
-       
+        container.register('IPatientService', {
+            useClass: PatientService
+        });
     }
 
     private setupControllers(): void {
@@ -97,9 +100,7 @@ class App extends Server {
         super.addControllers(controllerInstances);
     }
 
-    private async reqisterEventHandlers() {
-
-    }
+    private async reqisterEventHandlers() {}
 
     public start(): void {
         const port: number = process.env.APP_PORT ? Number(process.env.APP_PORT) : 3000;
