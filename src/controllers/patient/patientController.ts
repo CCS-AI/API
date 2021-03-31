@@ -40,7 +40,8 @@ export class PatientController {
     private async create(req: ISecureRequest, res: Response) {
         try {
             //here create patient and send to response
-            await this.patientService.create(req.body);
+            const { organizationId } = req.payload;
+            await this.patientService.create({ ...req.body, organizationId });
             return res.status(OK).send('SUCCESS');
         } catch (error) {
             routeErrorHandling(error, req, res);

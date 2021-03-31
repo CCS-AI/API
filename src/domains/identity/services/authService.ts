@@ -16,6 +16,7 @@ class AuthService implements IAuthService {
             userName: user.FullName,
             userPicture: user.profileImg,
             email: user.Email,
+            organizationId: user.organizationId
         });
 
         const refreshToken = jwtRefreshToken.jwt({ userId: user.Id });

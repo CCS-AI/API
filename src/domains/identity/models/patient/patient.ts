@@ -64,7 +64,8 @@ const attributes = {
     },
     organizationId: {
         type: DataTypes.UUID,
-        field: 'organization_id'
+        field: 'organization_id',
+        allowNull: false
     },
     personalId: {
         type: DataTypes.NUMBER,

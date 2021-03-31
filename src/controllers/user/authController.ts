@@ -14,6 +14,7 @@ import { IEmailService } from '../../Infrastructure/emailService/IEmailService';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
 import { ILogger } from '../../Infrastructure/logging/ILogger';
 import { credentialsSchema } from '../../Infrastructure/schemas/auth/credentials';
+import { RouteMustAuth } from 'src/Infrastructure/decorators/jwt';
 
 @injectable()
 @Controller('api/auth')
@@ -31,15 +32,18 @@ class AuthController {
     }
 
     @Post('register')
+    @RouteMustAuth()
     @ValidateBody(registerSchema)
-    private async register(req: Request, res: Response) {
+    private async register(req: ISecureRequest, res: Response) {
         try {
             const { email, password, firstName, lastName, birthDate, profileImg, role } = req.body;
+
+            const { organizationId } = req.payload;
 
             const user: User | null = await this.userService.getByEmail(email.trim().toLowerCase());
             if (user) return res.status(UNAUTHORIZED).send('EMAIL_ALREADY_EXISTS');
 
-            await this.userService.createUser(User.build({ email, password, firstName, lastName, birthDate, profileImg, role }));
+            await this.userService.createUser(User.build({ email, password, firstName, lastName, birthDate, profileImg, role, organizationId }));
             return res.status(OK).send('REGISTERED_SUCCESFULLY');
         } catch (error) {
             routeErrorHandling(error, req, res);

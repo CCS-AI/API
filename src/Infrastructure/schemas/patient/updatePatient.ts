@@ -14,8 +14,7 @@ export const updatePatient = {
                 phone1: { type: 'string' },
                 phone2: { type: 'string' },
                 hmo: { type: 'number' },
-                personalId: { type: 'string' },
-                organizationId: { type: 'string' }
+                personalId: { type: 'string' }
             },
             type: 'object'
         }
