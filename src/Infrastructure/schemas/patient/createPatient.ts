@@ -10,8 +10,7 @@ export const createPatient = {
         phone1: { type: 'string' },
         phone2: { type: 'string' },
         hmo: { type: 'number' },
-        personalId: { type: 'string' },
-        organizationId: { type: 'string' }
+        personalId: { type: 'string' }
     },
     required: [],
     type: 'object'

@@ -21,6 +21,7 @@ class User extends Model {
     public createdAt: Date;
     public updatedAt: Date;
     public deletedAt: Date;
+    public organizationId: string;
 
     get Id() {
         return this.id;
@@ -105,6 +106,11 @@ const attributes = {
     shouldResetPassword: {
         field: 'should_reset_password',
         type: DataTypes.BOOLEAN
+    },
+    organizationId: {
+        type: DataTypes.UUID,
+        field: 'organization_id',
+        allowNull: false
     }
 };
 

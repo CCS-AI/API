@@ -49,7 +49,8 @@ class UserService implements IUserService {
             lastName: user.lastName,
             role: user.role,
             phoneNumber: user.phoneNumber,
-            birthDate: user.birthDate
+            birthDate: user.birthDate,
+            organizationId: user.organizationId
         });
     }
 
