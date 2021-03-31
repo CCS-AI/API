@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a1ba4044-1ce2-46f3-8d73-e45b26a5e1fe",
+		"_postman_id": "5d023244-7df2-48a1-ac7d-c5df558cd840",
 		"name": "CCS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -97,11 +97,21 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"benitosh12@gmail.com\",\r\n    \"password\":\"Aa123456\",\r\n    \"firstName\":\"Dvir\",\r\n    \"lastName\":\"Benita\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"raw": "{\r\n    \"email\":\"testuser@gmail.com\",\r\n    \"password\":\"Aa123456\",\r\n    \"firstName\":\"test\",\r\n    \"lastName\":\"user\",\r\n    \"role\": \"TEST\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
