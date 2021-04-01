@@ -9,10 +9,12 @@ import { ValidateBody } from 'src/Infrastructure/decorators/validations';
 import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
+import { UserBounded } from '../../Infrastructure/decorators/userBounded';
 
 @injectable()
 @Controller('api/patientMedicalFile')
 @MustAuth()
+@UserBounded()
 export class PatientMedicalFileController {
     constructor(@inject('IPatientMedicalFileService') private pmfService: IPatientMedicalFileService) {}
     @Get('all')
