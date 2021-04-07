@@ -1,11 +1,11 @@
-import { createPmf } from 'src/Infrastructure/schemas/patientMedicalFile/createPmf';
+import { createPmf } from './../../Infrastructure/schemas/patientMedicalFile/createPmf';
 import { updatePmf } from './../../Infrastructure/schemas/patientMedicalFile/updatePmf';
 import { IPatientMedicalFileService } from './../../domains/identity/services/patientMedicalFileService';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Response } from 'express';
 import { OK } from 'http-status-codes';
-import { ValidateBody } from 'src/Infrastructure/decorators/validations';
+import { ValidateBody } from './../../Infrastructure/decorators/validations';
 import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';

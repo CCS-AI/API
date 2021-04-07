@@ -14,7 +14,7 @@ import { IEmailService } from '../../Infrastructure/emailService/IEmailService';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
 import { ILogger } from '../../Infrastructure/logging/ILogger';
 import { credentialsSchema } from '../../Infrastructure/schemas/auth/credentials';
-import { RouteMustAuth } from 'src/Infrastructure/decorators/jwt';
+import { RouteMustAuth } from './../../Infrastructure/decorators/jwt';
 
 @injectable()
 @Controller('api/auth')

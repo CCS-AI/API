@@ -12,6 +12,7 @@ import * as controllers from './controllers';
 import UserBounded from './domains/identity/models/user/userBounded';
 
 import AuthService from './domains/identity/services/authService';
+import ExaminerService from './domains/identity/services/examinerService';
 import PatientMedicalFileService from './domains/identity/services/patientMedicalFileService';
 import PatientService from './domains/identity/services/patientService';
 import UserService from './domains/identity/services/userService';
@@ -93,6 +94,9 @@ class App extends Server {
         container.register('IPatientMedicalFileService', {
             useClass: PatientMedicalFileService
         });
+        container.register('IExaminerService', {
+            useClass: ExaminerService
+        });
     }
 
     private setupControllers(): void {
@@ -108,7 +112,9 @@ class App extends Server {
         super.addControllers(controllerInstances);
     }
 
-    private async reqisterEventHandlers() {}
+    private async reqisterEventHandlers() {
+        //
+    }
 
     public start(): void {
         const port: number = process.env.APP_PORT ? Number(process.env.APP_PORT) : 3000;

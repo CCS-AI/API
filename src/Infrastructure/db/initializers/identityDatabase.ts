@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import { initOrganization, initPatient, initPatientMedicalFile, initUser } from '../../../domains/identity/models';
+import { initOrganization, initPatient, initPatientMedicalFile, initUser, initExaminer } from '../../../domains/identity/models';
 
 class identityDatabase {
     static initModels(sequelize: Sequelize) {
@@ -7,6 +7,7 @@ class identityDatabase {
         initPatientMedicalFile(sequelize);
         initPatient(sequelize);
         initOrganization(sequelize);
+        initExaminer(sequelize);
     }
 }
 

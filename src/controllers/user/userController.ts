@@ -1,3 +1,4 @@
+import { IExaminerService } from './../../domains/identity/services/examinerService';
 import { Controller, Get } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Logger as consoleLog } from '@overnightjs/logger';
@@ -12,7 +13,11 @@ import { ILogger } from '../../Infrastructure/logging/ILogger';
 @injectable()
 @Controller('api/user')
 export class UserController {
-    constructor(@inject('IUserService') private userService: IUserService, @inject('ILogger') private logger: ILogger) {}
+    constructor(
+        @inject('IUserService') private userService: IUserService,
+        @inject('ILogger') private logger: ILogger,
+        @inject('IExaminerService') private examinerService: IExaminerService
+    ) {}
 
     @Get('getByEmail/:email')
     private async get(req: Request, res: Response) {
@@ -39,8 +44,7 @@ export class UserController {
             if (!user) {
                 return res.status(NOT_FOUND).send('USER_NOT_FOUND');
             }
-
-            return res.status(OK).json({
+            const userInfo = {
                 id: user.Id,
                 email: user.Email,
                 firstName: user.firstName,
@@ -49,7 +53,15 @@ export class UserController {
                 birthDate: user.birthDate,
                 phoneNumber: user.phoneNumber,
                 profileImg: user.profileImg
-            });
+            } as any;
+            switch (user.role) {
+                case 'EXAMINER': {
+                    const examiner = await this.examinerService.getByUserId(user.id);
+                    userInfo.extendInfo = { ...examiner?.get() };
+                    break;
+                }
+            }
+            return res.status(OK).json(userInfo);
         } catch (error) {
             routeErrorHandling(error, req, res);
         }
