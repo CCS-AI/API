@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 
 enum Gender {
     MALE = 1,
@@ -78,6 +79,11 @@ const initPatient = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'patients',
         timestamps: true
+    });
+    PatientMedicalFile.hasOne(Patient, {
+        foreignKey: 'id',
+        sourceKey: 'patientId',
+        as: 'patient'
     });
 };
 

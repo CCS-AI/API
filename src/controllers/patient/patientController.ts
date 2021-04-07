@@ -9,10 +9,12 @@ import { createPatient } from 'src/Infrastructure/schemas/patient/createPatient'
 import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
+import { UserBounded } from '../../Infrastructure/decorators/userBounded';
 
 @injectable()
 @Controller('api/patient')
 @MustAuth()
+@UserBounded()
 export class PatientController {
     constructor(@inject('IPatientService') private patientService: IPatientService) {}
     @Get('all')
@@ -40,8 +42,7 @@ export class PatientController {
     private async create(req: ISecureRequest, res: Response) {
         try {
             //here create patient and send to response
-            const { organizationId } = req.payload;
-            await this.patientService.create({ ...req.body, organizationId });
+            await this.patientService.create(req.body);
             return res.status(OK).send('SUCCESS');
         } catch (error) {
             routeErrorHandling(error, req, res);

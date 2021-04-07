@@ -9,6 +9,7 @@ import helmet from 'helmet';
 import multer from 'multer';
 import { container } from 'tsyringe';
 import * as controllers from './controllers';
+import UserBounded from './domains/identity/models/user/userBounded';
 
 import AuthService from './domains/identity/services/authService';
 import ExaminerService from './domains/identity/services/examinerService';
@@ -76,6 +77,9 @@ class App extends Server {
 
         const db = new Database();
         container.registerInstance('database', db);
+
+        const userBounded = new UserBounded();
+        container.registerInstance('UserBounded', userBounded);
 
         //Services
         container.register('IUserService', {
