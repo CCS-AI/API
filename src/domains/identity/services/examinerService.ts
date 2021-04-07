@@ -1,8 +1,9 @@
-import { createExaminer } from 'src/Infrastructure/schemas/examiner/createExaminer';
+import { container } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 //import { examiner } from '../models';
 import { Examiner } from '../models/examiner/examiner';
+import UserService, { IUserService } from './userService';
 
 export interface IExaminerService {
     getById(ExaminerId: string): Promise<Examiner | null>;
@@ -14,7 +15,10 @@ export interface IExaminerService {
 }
 
 class ExaminerService implements IExaminerService {
-    // userService: any; //ask Eliel--------------------------------------
+    private userService: IUserService;
+    constructor() {
+        this.userService = container.resolve<IUserService>('IUserService');
+    }
     async getById(examinerId: string): Promise<Examiner | null> {
         const examiner = await Examiner.findOne({ where: { id: examinerId } });
         return examiner;
@@ -34,8 +38,9 @@ class ExaminerService implements IExaminerService {
         await Examiner.update(examiner, { where: { id: examinerId } });
     }
     async register(user: User, licenseNumber: string): Promise<void> {
-        // const userT = await this.userService.createUser(user);
-        // await this.create(Examiner.build({ userId: userT.Id, licenseNumber }));
+        const userT = await this.userService.createUser(user);
+        console.log(userT);
+        await this.create(Examiner.build({ userId: userT.id, licenseNumber }));
     }
 }
 export default ExaminerService;

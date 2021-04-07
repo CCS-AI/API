@@ -7,9 +7,9 @@ const PASSWORD_REGEX = '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})';
 const EMAIL_REGEXP = '/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/';
 
 class User extends Model {
-    private id: string;
-    private email: string;
-    private password: string;
+    public id: string;
+    public email: string;
+    public password: string;
 
     public firstName: string;
     public lastName: string;

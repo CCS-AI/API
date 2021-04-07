@@ -1,12 +1,15 @@
-export const createExaminer = {
+export const registerSchema = {
     additionalProperties: false,
     properties: {
-        id: { type: 'string' },
-        userid: { type: 'string' },
+        email: { type: 'string', format: 'email' },
+        password: { type: 'string' },
         firstName: { type: 'string' },
         lastName: { type: 'string' },
+        phoneNumber: { type: 'string' },
+        birthDate: { type: 'string' },
+        profileImg: { type: 'string' },
         licenseNumber: { type: 'string' }
     },
-    required: [],
+    required: ['email', 'password', 'firstName', 'lastName'],
     type: 'object'
 };

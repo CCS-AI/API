@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import { initExaminer } from 'src/domains/identity/models/examiner/examiner';
 import { initOrganization, initPatient, initPatientMedicalFile, initUser } from '../../../domains/identity/models';
 
 class identityDatabase {
@@ -7,6 +8,7 @@ class identityDatabase {
         initPatientMedicalFile(sequelize);
         initPatient(sequelize);
         initOrganization(sequelize);
+        initExaminer(sequelize);
     }
 }
 

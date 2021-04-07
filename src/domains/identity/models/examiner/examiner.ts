@@ -27,7 +27,7 @@ const attributes = {
 const initExaminer = (sequelize: Sequelize): void => {
     Examiner.init(attributes, {
         sequelize,
-        tableName: 'examiners',
+        tableName: 'examiner',
         timestamps: true
     });
 };
