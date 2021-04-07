@@ -1,15 +1,14 @@
 import { container } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
-//import { examiner } from '../models';
 import { Examiner } from '../models/examiner/examiner';
-import UserService, { IUserService } from './userService';
+import { IUserService } from './userService';
 
 export interface IExaminerService {
-    getById(ExaminerId: string): Promise<Examiner | null>;
-    getByEmail(email: string): Promise<Examiner | null>;
+    getById(examinerId: string): Promise<Examiner | null>;
+    getByUserId(userId: string): Promise<Examiner | null>;
     getAll(): Promise<Examiner[] | null>;
-    create(Examiner: Examiner): Promise<void>;
+    create(examiner: Examiner): Promise<void>;
     register(user: User, licenseNumber: string): Promise<void>;
     update(examinerId: string, examiner: Examiner): Promise<void>;
 }
@@ -23,8 +22,8 @@ class ExaminerService implements IExaminerService {
         const examiner = await Examiner.findOne({ where: { id: examinerId } });
         return examiner;
     }
-    async getByEmail(email: string): Promise<Examiner | null> {
-        const examiner = await Examiner.findOne({ where: { email } });
+    async getByUserId(userId: string): Promise<Examiner | null> {
+        const examiner = await Examiner.findOne({ where: { userId } });
         return examiner;
     }
     async getAll(): Promise<Examiner[] | null> {
@@ -32,15 +31,15 @@ class ExaminerService implements IExaminerService {
         return examiners;
     }
     async create(examiner: Examiner): Promise<void> {
+        console.log('examinerService : examiner', examiner);
         await Examiner.create(examiner);
     }
     async update(examinerId: string, examiner: Examiner): Promise<void> {
         await Examiner.update(examiner, { where: { id: examinerId } });
     }
     async register(user: User, licenseNumber: string): Promise<void> {
-        const userT = await this.userService.createUser(user);
-        console.log(userT);
-        await this.create(Examiner.build({ userId: userT.id, licenseNumber }));
+        const createdUser = await this.userService.createUser(user);
+        await this.create({ userId: createdUser.id, licenseNumber } as Examiner);
     }
 }
 export default ExaminerService;

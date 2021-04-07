@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9e77b875-7c0a-46cf-ba1f-2ec753e2d30c",
+		"_postman_id": "1ccb3ed9-a43c-4dce-8f36-12e19b95e799",
 		"name": "CCS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -317,13 +317,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/examiner/2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e",
+							"raw": "{{base_url}}/examiner/ab0b0ffd-2feb-4638-a891-db69205d88b5",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"examiner",
-								"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e"
+								"ab0b0ffd-2feb-4638-a891-db69205d88b5"
 							]
 						}
 					},
@@ -346,7 +346,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"moshe123233@patient.com\",\r\n    \"firstName\": \"moshe\",\r\n    \"lastName\": \"test\",\r\n    \"licenseNumber\":\"123123\",\r\n    \"password\":\"Aa123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"moshe12323222237@patient.com\",\r\n    \"firstName\": \"moshe\",\r\n    \"lastName\": \"test\",\r\n    \"licenseNumber\":\"123123\",\r\n    \"password\":\"Aa123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -389,42 +389,6 @@
 							"path": [
 								"examiner",
 								"all"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e\",\r\n    \"data\": {\r\n        \"address\": \"ariel\"\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{base_url}}/examiner",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"examiner"
 							]
 						}
 					},

@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize';
-import { initExaminer } from 'src/domains/identity/models/examiner/examiner';
-import { initOrganization, initPatient, initPatientMedicalFile, initUser } from '../../../domains/identity/models';
+import { initOrganization, initPatient, initPatientMedicalFile, initUser, initExaminer } from '../../../domains/identity/models';
 
 class identityDatabase {
     static initModels(sequelize: Sequelize) {

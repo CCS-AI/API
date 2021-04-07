@@ -1,17 +1,15 @@
 import { IExaminerService } from './../../domains/identity/services/examinerService';
-import { updateExaminer } from './../../Infrastructure/schemas/examiner/updateExaminer';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Response } from 'express';
 import { OK, UNAUTHORIZED } from 'http-status-codes';
-import { ValidateBody } from 'src/Infrastructure/decorators/validations';
+import { ValidateBody } from '../../Infrastructure/decorators/validations';
 import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
-import { User } from 'src/domains/identity/models';
-import { Examiner } from 'src/domains/identity/models/examiner/examiner';
-import { registerSchema } from 'src/Infrastructure/schemas/examiner/createExaminer';
-import { IUserService } from 'src/domains/identity/services/userService';
+import { User } from './../../domains/identity/models';
+import { registerSchema } from '../../Infrastructure/schemas/examiner/createExaminer';
+import { IUserService } from './../../domains/identity/services/userService';
 
 @injectable()
 @Controller('api/examiner')
@@ -69,15 +67,15 @@ export class ExaminerController {
             routeErrorHandling(error, req, res);
         }
     }
-    @Put('')
-    @ValidateBody(updateExaminer)
-    private async update(req: ISecureRequest, res: Response) {
-        try {
-            //here update examiner and send to response
-            await this.examinerService.update(req.body.id, req.body.data);
-            return res.status(OK).send('SUCCESS');
-        } catch (error) {
-            routeErrorHandling(error, req, res);
-        }
-    }
+    // @Put('')
+    // @ValidateBody(updateExaminer)
+    // private async update(req: ISecureRequest, res: Response) {
+    //     try {
+    //         //here update examiner and send to response
+    //         await this.examinerService.update(req.body.id, req.body.data);
+    //         return res.status(OK).send('SUCCESS');
+    //     } catch (error) {
+    //         routeErrorHandling(error, req, res);
+    //     }
+    // }
 }
