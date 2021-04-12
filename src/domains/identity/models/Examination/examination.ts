@@ -13,6 +13,7 @@ class Examination extends Model {
     public id: string;
     public pmfid: string;
     public createdAt: Date;
+    public updatedAt: Date;
     public info: Array<examResult>;
 }
 
@@ -25,6 +26,10 @@ const attributes = {
     },
     pmfid: {
         type: DataTypes.UUIDV4,
+        allowNull: false
+    },
+    info: {
+        type: DataTypes.JSON,
         allowNull: false
     }
 };

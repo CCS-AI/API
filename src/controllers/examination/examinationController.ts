@@ -19,7 +19,7 @@ export class ExaminationController {
         @inject('IExaminationService') private examinationService: IExaminationService,
         @inject('IUserService') private userService: IUserService
     ) {}
-    @Get('all')
+    @Get('allbypmf/:pmfid')
     private async getAllByPmf(req: ISecureRequest, res: Response) {
         try {
             //here getAllByPmfid examination and send to response
@@ -33,7 +33,7 @@ export class ExaminationController {
     private async get(req: ISecureRequest, res: Response) {
         try {
             console.log(req.params);
-            const examination = await this.examinationService.getById(req.params.examinationId);
+            const examination = await this.examinationService.getById(req.params.id);
             //here get examination and send to response
             return res.status(OK).send(examination);
         } catch (error) {
