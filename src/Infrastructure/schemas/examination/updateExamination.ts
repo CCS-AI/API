@@ -1,10 +1,15 @@
-import { Examination } from 'src/domains/identity/models/Examination/examination';
-
 export const updateExamination = {
     additionalProperties: false,
     properties: {
         id: { type: 'string' },
-        examination: { type: Examination }
+        data: {
+            additionalProperties: false,
+            properties: {
+                pmfId: { type: 'string' },
+                info: { type: 'array' }
+            },
+            type: 'object'
+        }
     },
     required: ['id'],
     type: 'object'

@@ -31,7 +31,6 @@ class ExaminerService implements IExaminerService {
         return examiners;
     }
     async create(examiner: Examiner): Promise<void> {
-        console.log('examinerService : examiner', examiner);
         await Examiner.create(examiner);
     }
     async update(examinerId: string, examiner: Examiner): Promise<void> {

@@ -11,7 +11,7 @@ type examResult = {
 
 class Examination extends Model {
     public id: string;
-    public pmfid: string;
+    public pmfId: string;
     public createdAt: Date;
     public updatedAt: Date;
     public info: Array<examResult>;
@@ -24,7 +24,8 @@ const attributes = {
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
     },
-    pmfid: {
+    pmfId: {
+        field: 'pmf_id',
         type: DataTypes.UUIDV4,
         allowNull: false
     },

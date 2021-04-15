@@ -19,11 +19,11 @@ export class ExaminationController {
         @inject('IExaminationService') private examinationService: IExaminationService,
         @inject('IUserService') private userService: IUserService
     ) {}
-    @Get('allbypmf/:pmfid')
+    @Get('pmf/:pmfId')
     private async getAllByPmf(req: ISecureRequest, res: Response) {
         try {
             //here getAllByPmfid examination and send to response
-            const examinations = await this.examinationService.getAllByPmf(req.params.pmfid);
+            const examinations = await this.examinationService.getAllByPmf(req.params.pmfId);
             return res.status(OK).send(examinations);
         } catch (error) {
             routeErrorHandling(error, req, res);

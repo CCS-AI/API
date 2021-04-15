@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d0b480e9-9dcb-4f0a-92a0-48147481e7fd",
+		"_postman_id": "237dee55-64ab-4556-b024-40f819f3df64",
 		"name": "CCS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -317,13 +317,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/patient/2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e",
+							"raw": "{{base_url}}/examination/66d62377-3a38-4a2c-8bf8-a6fb48974223",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"patient",
-								"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e"
+								"examination",
+								"66d62377-3a38-4a2c-8bf8-a6fb48974223"
 							]
 						}
 					},
@@ -346,7 +346,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pmfid\": \"e68062a8-ddf7-4a33-ae23-9228d1ce7d64\",\r\n    \"info\": \"moshe\"\r\n}",
+							"raw": "{\r\n    \"pmfid\": \"e68062a8-ddf7-4a33-ae23-9228d1ce7d64\",\r\n    \"info\": [\r\n        {\r\n            \"x\": \"12\",\r\n            \"y\": \"1\",\r\n            \"ear\": \"RIGHT\",\r\n            \"type\": \"examinationType\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,13 +381,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/patient/all",
+							"raw": "{{base_url}}/examination/pmf/e68062a8-ddf7-4a33-ae23-9228d1ce7d64",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"patient",
-								"all"
+								"examination",
+								"pmf",
+								"e68062a8-ddf7-4a33-ae23-9228d1ce7d64"
 							]
 						}
 					},
@@ -410,7 +411,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e\",\r\n    \"data\": {\r\n        \"address\": \"ariel\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"id\": \"2acb06b5-bc2a-465f-b27f-07cf9ce7ce6e\",\r\n    \"data\": {\r\n        \"info\": [\r\n            {\r\n                \"x\": \"12\",\r\n                \"y\": \"1\",\r\n                \"ear\": \"RIGHT\",\r\n                \"type\": \"examinationType\"\r\n            }\r\n        ]\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -418,12 +419,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/patient",
+							"raw": "{{base_url}}/examination",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"patient"
+								"examination"
 							]
 						}
 					},

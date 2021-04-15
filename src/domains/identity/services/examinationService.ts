@@ -16,7 +16,7 @@ class ExaminationService implements IExaminationService {
         this.userService = container.resolve<IUserService>('IUserService');
     }
     async getAllByPmf(pmfId: string): Promise<Examination[] | null> {
-        const examinations = await Examination.findAll({ where: { pmfid: pmfId } });
+        const examinations = await Examination.findAll({ where: { pmfId } });
         return examinations;
     }
     async getById(examinationId: string): Promise<Examination | null> {
@@ -24,7 +24,6 @@ class ExaminationService implements IExaminationService {
         return examination;
     }
     async create(examination: Examination): Promise<void> {
-        console.log('examinationService : examination', examination);
         await Examination.create(examination);
     }
     async update(examinationId: string, examination: Examination): Promise<void> {

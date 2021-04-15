@@ -1,9 +1,9 @@
 export const createExamination = {
     additionalProperties: false,
     properties: {
-        pmfid: { type: 'string' },
-        info: { info: 'string' }
+        pmfId: { type: 'string' },
+        info: { type: 'array' }
     },
-    required: ['pmfid', 'info'],
+    required: ['pmfId', 'info'],
     type: 'object'
 };
