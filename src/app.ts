@@ -12,6 +12,7 @@ import * as controllers from './controllers';
 import UserBounded from './domains/identity/models/user/userBounded';
 
 import AuthService from './domains/identity/services/authService';
+import ExaminationService from './domains/identity/services/examinationService';
 import ExaminerService from './domains/identity/services/examinerService';
 import PatientMedicalFileService from './domains/identity/services/patientMedicalFileService';
 import PatientService from './domains/identity/services/patientService';
@@ -96,6 +97,9 @@ class App extends Server {
         });
         container.register('IExaminerService', {
             useClass: ExaminerService
+        });
+        container.register('IExaminationService', {
+            useClass: ExaminationService
         });
     }
 
