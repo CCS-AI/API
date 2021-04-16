@@ -1,4 +1,4 @@
-import { createExamination } from 'src/Infrastructure/schemas/examination/createExamination';
+import { createExamination } from '../../Infrastructure/schemas/examination/createExamination';
 import { IExaminationService } from './../../domains/identity/services/examinationService';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
@@ -9,7 +9,7 @@ import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
 import { IUserService } from './../../domains/identity/services/userService';
-import { updateExamination } from 'src/Infrastructure/schemas/examination/updateExamination';
+import { updateExamination } from '../../Infrastructure/schemas/examination/updateExamination';
 
 @injectable()
 @Controller('api/examination')

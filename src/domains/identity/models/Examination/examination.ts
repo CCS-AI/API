@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 
 type examinationType = 'AC' | 'AC+MASK' | 'BC' | 'BC+MASK' | 'WEBER' | 'NO_RESPONSE' | 'FF' | 'STENGER';
 
@@ -40,6 +41,11 @@ const initExamination = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'examination',
         timestamps: true
+    });
+    PatientMedicalFile.hasMany(Examination, {
+        as: 'examinations',
+        foreignKey: 'pmfId',
+        sourceKey: 'id'
     });
 };
 

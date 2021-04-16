@@ -3,6 +3,7 @@ import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 import { Patient, PatientMedicalFile } from '../models';
 import UserBounded from '../models/user/userBounded';
+import { Examination } from '../models/examination/examination';
 
 export interface IPatientMedicalFileService {
     getById(pmfId: string): Promise<PatientMedicalFile | null>;
@@ -23,6 +24,10 @@ class PatientMedicalFileService implements IPatientMedicalFileService {
             include: [
                 {
                     ...this.patientOrgInclude()
+                },
+                {
+                    model: Examination,
+                    as: 'examinations'
                 }
             ]
         });

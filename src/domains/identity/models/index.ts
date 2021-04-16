@@ -4,3 +4,4 @@ export * from './patient/patient';
 export * from './patientMedicalFile/patientMedicalFile';
 export * from './organization/organization';
 export * from './examiner/examiner';
+export * from './examination/examination';
