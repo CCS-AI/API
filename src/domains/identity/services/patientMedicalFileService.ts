@@ -7,6 +7,7 @@ import { Examination } from '../models/examination/examination';
 
 export interface IPatientMedicalFileService {
     getById(pmfId: string): Promise<PatientMedicalFile | null>;
+    getByPatientId(pmfId: string): Promise<PatientMedicalFile | null>;
     getByEmail(email: string): Promise<PatientMedicalFile | null>;
     getAll(): Promise<PatientMedicalFile[] | null>;
     create(pmf: PatientMedicalFile): Promise<void>;
@@ -24,6 +25,26 @@ class PatientMedicalFileService implements IPatientMedicalFileService {
             include: [
                 {
                     ...this.patientOrgInclude()
+                },
+                {
+                    model: Examination,
+                    as: 'examinations'
+                }
+            ]
+        });
+        return pmf;
+    }
+    async getByPatientId(patientId: string): Promise<PatientMedicalFile | null> {
+        const pmf = await PatientMedicalFile.findOne({
+            where: { patientId },
+            include: [
+                {
+                    model: Patient,
+                    as: 'patient',
+                    required: true,
+                    where: {
+                        organizationId: this.userBounded.orgId
+                    }
                 },
                 {
                     model: Examination,

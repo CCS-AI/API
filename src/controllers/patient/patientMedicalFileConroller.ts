@@ -30,9 +30,9 @@ export class PatientMedicalFileController {
     @Get(':patientId')
     private async get(req: ISecureRequest, res: Response) {
         try {
-            const patient = await this.pmfService.getById(req.params.patientId);
+            const pmf = await this.pmfService.getByPatientId(req.params.patientId);
             //here get patient and send to response
-            return res.status(OK).send(patient);
+            return res.status(OK).send(pmf);
         } catch (error) {
             routeErrorHandling(error, req, res);
         }
