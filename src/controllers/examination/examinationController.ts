@@ -1,4 +1,4 @@
-import { IhelpFunctions } from './../utils/helpFunctions';
+import { IHelpFunctions } from './../utils/helpFunctions';
 import { createExamination } from '../../Infrastructure/schemas/examination/createExamination';
 import { IExaminationService } from './../../domains/identity/services/examinationService';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
@@ -19,7 +19,7 @@ export class ExaminationController {
     constructor(
         @inject('IExaminationService') private examinationService: IExaminationService,
         @inject('IUserService') private userService: IUserService,
-        @inject('helpFunctions') private helpFunctions: IhelpFunctions
+        @inject('IHelpFunctions') private helpFunctions: IHelpFunctions
     ) {}
     @Get('pmf/:pmfId')
     private async getAllByPmf(req: ISecureRequest, res: Response) {

@@ -1,4 +1,4 @@
-import { IhelpFunctions } from './../utils/helpFunctions';
+import { IHelpFunctions } from './../utils/helpFunctions';
 import { IExaminerService } from './../../domains/identity/services/examinerService';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
@@ -19,7 +19,7 @@ export class ExaminerController {
     constructor(
         @inject('IExaminerService') private examinerService: IExaminerService,
         @inject('IUserService') private userService: IUserService,
-        @inject('helpFunctions') private helpFunctions: IhelpFunctions
+        @inject('IHelpFunctions') private helpFunctions: IHelpFunctions
     ) {}
     @Get('all')
     private async getAll(req: ISecureRequest, res: Response) {

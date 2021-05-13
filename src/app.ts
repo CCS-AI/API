@@ -1,4 +1,4 @@
-//import { HelpFunctions } from './controllers/utils/helpFunctions';
+import HelpFunctions from './controllers/utils/helpFunctions';
 import { Server } from '@overnightjs/core';
 import { Logger as ConsoleLog } from '@overnightjs/logger';
 import * as bodyParser from 'body-parser';
@@ -104,11 +104,10 @@ class App extends Server {
         container.register('IExaminationService', {
             useClass: ExaminationService
         });
-        //Helpers
-        // container.register('IhelpFunctions', {
-        //     useClass: HelpFunctions
-        // });
-    }
+        // Helpers
+        container.register('IHelpFunctions', {
+            useClass: HelpFunctions
+        });
     }
 
     private setupControllers(): void {

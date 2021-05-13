@@ -1,4 +1,4 @@
-import { IhelpFunctions } from './../utils/helpFunctions';
+import { IHelpFunctions } from './../utils/helpFunctions';
 import { IPatientService } from './../../domains/identity/services/patientService';
 import { updatePatient } from './../../Infrastructure/schemas/patient/updatePatient';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
@@ -19,7 +19,7 @@ import { UserBounded } from '../../Infrastructure/decorators/userBounded';
 export class PatientController {
     constructor(
         @inject('IPatientService') private patientService: IPatientService,
-        @inject('IhelpFunctions') private helpFunctions: IhelpFunctions
+        @inject('IHelpFunctions') private helpFunctions: IHelpFunctions
     ) {}
 
     @Get('all')
