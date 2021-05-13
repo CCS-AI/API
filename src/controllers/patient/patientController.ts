@@ -1,9 +1,10 @@
+import { IhelpFunctions } from './../utils/helpFunctions';
 import { IPatientService } from './../../domains/identity/services/patientService';
 import { updatePatient } from './../../Infrastructure/schemas/patient/updatePatient';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Response } from 'express';
-import { OK } from 'http-status-codes';
+import { OK, INTERNAL_SERVER_ERROR } from 'http-status-codes';
 import { ValidateBody } from './../../Infrastructure/decorators/validations';
 import { createPatient } from './../../Infrastructure/schemas/patient/createPatient';
 import { inject, injectable } from 'tsyringe';
@@ -16,7 +17,11 @@ import { UserBounded } from '../../Infrastructure/decorators/userBounded';
 @MustAuth()
 @UserBounded()
 export class PatientController {
-    constructor(@inject('IPatientService') private patientService: IPatientService) {}
+    constructor(
+        @inject('IPatientService') private patientService: IPatientService,
+        @inject('IhelpFunctions') private helpFunctions: IhelpFunctions
+    ) {}
+
     @Get('all')
     private async getAll(req: ISecureRequest, res: Response) {
         try {
@@ -42,8 +47,12 @@ export class PatientController {
     private async create(req: ISecureRequest, res: Response) {
         try {
             //here create patient and send to response
-            await this.patientService.create(req.body);
-            return res.status(OK).send('SUCCESS');
+            if (await this.helpFunctions.checkPremission(req.payload.role, 'createPatient')) {
+                await this.patientService.create(req.body);
+                return res.status(OK).send('SUCCESS');
+            } else {
+                return res.status(INTERNAL_SERVER_ERROR).send('You do not have permission to create a patient');
+            }
         } catch (error) {
             routeErrorHandling(error, req, res);
         }
