@@ -1,3 +1,4 @@
+import HelpFunctions from './controllers/utils/helpFunctions';
 import { Server } from '@overnightjs/core';
 import { Logger as ConsoleLog } from '@overnightjs/logger';
 import * as bodyParser from 'body-parser';
@@ -13,6 +14,7 @@ import UserBounded from './domains/identity/models/user/userBounded';
 
 import AuthService from './domains/identity/services/authService';
 import ExaminationService from './domains/identity/services/examinationService';
+
 import ExaminerService from './domains/identity/services/examinerService';
 import PatientMedicalFileService from './domains/identity/services/patientMedicalFileService';
 import PatientService from './domains/identity/services/patientService';
@@ -20,6 +22,7 @@ import UserService from './domains/identity/services/userService';
 import Database from './Infrastructure/db/sequelize';
 import EmailService from './Infrastructure/emailService/emailService';
 import fatalErrorHandling from './Infrastructure/exceptions/fatalErrorHandling';
+
 import { LogzioLogger } from './Infrastructure/logging/logzio';
 
 const upload = multer();
@@ -100,6 +103,10 @@ class App extends Server {
         });
         container.register('IExaminationService', {
             useClass: ExaminationService
+        });
+        // Helpers
+        container.register('IHelpFunctions', {
+            useClass: HelpFunctions
         });
     }
 

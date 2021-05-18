@@ -1,9 +1,10 @@
+import { IHelpFunctions } from './../utils/helpFunctions';
 import { createExamination } from '../../Infrastructure/schemas/examination/createExamination';
 import { IExaminationService } from './../../domains/identity/services/examinationService';
 import { Controller, Get, Post, Put } from '@overnightjs/core';
 import { ISecureRequest } from '@overnightjs/jwt';
 import { Response } from 'express';
-import { OK, UNAUTHORIZED } from 'http-status-codes';
+import { OK, UNAUTHORIZED, INTERNAL_SERVER_ERROR } from 'http-status-codes';
 import { ValidateBody } from '../../Infrastructure/decorators/validations';
 import { inject, injectable } from 'tsyringe';
 import { MustAuth } from '../../Infrastructure/decorators/jwt';
@@ -17,7 +18,8 @@ import { updateExamination } from '../../Infrastructure/schemas/examination/upda
 export class ExaminationController {
     constructor(
         @inject('IExaminationService') private examinationService: IExaminationService,
-        @inject('IUserService') private userService: IUserService
+        @inject('IUserService') private userService: IUserService,
+        @inject('IHelpFunctions') private helpFunctions: IHelpFunctions
     ) {}
     @Get('pmf/:pmfId')
     private async getAllByPmf(req: ISecureRequest, res: Response) {
@@ -44,9 +46,13 @@ export class ExaminationController {
     @ValidateBody(createExamination)
     private async create(req: ISecureRequest, res: Response) {
         try {
-            //here create examination and send to response
-            await this.examinationService.create(req.body);
-            return res.status(OK).send('SUCCESS');
+            if (await this.helpFunctions.checkPremission(req.payload.role, 'createExamination')) {
+                //here create examination and send to response
+                await this.examinationService.create(req.body);
+                return res.status(OK).send('SUCCESS');
+            } else {
+                return res.status(INTERNAL_SERVER_ERROR).send('You do not have permission to create a examination');
+            }
         } catch (error) {
             routeErrorHandling(error, req, res);
         }
