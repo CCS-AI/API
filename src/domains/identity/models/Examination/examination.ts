@@ -14,8 +14,8 @@ type sp = {
 type speechAudiometry = {
     SRT_db: sp;
     Disc: {
-        Rt: [0, 1];
-        Lt: [0, 1];
+        Rt: number;
+        Lt: number;
     };
     dB: sp;
     MCL: sp;
