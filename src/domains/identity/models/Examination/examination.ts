@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 
-type examinationType = 'AC' | 'AC+MASK' | 'BC' | 'BC+MASK' | 'WEBER' | 'NO_RESPONSE' | 'FF' | 'STENGER';
+type examinationType = 'AC' | 'AC+MASK' | 'BC' | 'BC+MASK' | 'WEBER' | 'FF' | 'STENGER';
 
 type sp = {
     Rt: number; // between 0-120
@@ -31,6 +31,7 @@ type examResult = {
     y: number;
     ear: 'RIGHT' | 'LEFT';
     type: examinationType;
+    isNoResponse: boolean;
 };
 
 class Examination extends Model {
