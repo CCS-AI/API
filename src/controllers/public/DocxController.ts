@@ -6,6 +6,7 @@ import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandli
 import { Response } from 'express';
 import WordExtractor from 'word-extractor';
 import Database from '../../Infrastructure/db/sequelize';
+import { Answer, Question, Questionnaire } from '../../domains/identity/models';
 
 @injectable()
 @Controller('api/docx')
@@ -34,14 +35,17 @@ export class DocxController {
                                 const questionStr = match[1];
                                 const question = await Question.create({ name: questionStr, questionnaireId: questionnaire.id }, { transaction });
                                 const answers = match[2].match(secondRegex);
-                                await Answer.bulkCreate(
-                                    answers?.map((item) => {
-                                        return { name: item, questionId: question.id };
-                                    }),
-                                    { fields: ['name', 'questionId'], transaction }
-                                );
+                                if (answers && answers.length)
+                                    await Answer.bulkCreate(
+                                        answers.map((item) => {
+                                            return { name: item, questionId: question.id };
+                                        }),
+                                        { transaction }
+                                    );
                             }
+                            await transaction.commit();
                         } catch (e) {
+                            console.log('DocxController : e', e);
                             await transaction.rollback();
                         }
                     }

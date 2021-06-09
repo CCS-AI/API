@@ -20,8 +20,8 @@ class identityDatabase {
         initPatient(sequelize);
         initOrganization(sequelize);
         initExaminer(sequelize);
-        initExamination(sequelize);
         initQuestionnaireResult(sequelize);
+        initExamination(sequelize);
         initQuestionnaire(sequelize);
         initQuestion(sequelize);
         initAnswer(sequelize);

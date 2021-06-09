@@ -16,10 +16,19 @@ import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandli
 export class QuestionnaireController {
     constructor(@inject('IQuestionnaireService') private questionnaireService: IQuestionnaireService) {}
 
+    @Get('all')
+    private async getAll(req: ISecureRequest, res: Response) {
+        try {
+            //here getAll patient and send to response
+            const patients = await this.questionnaireService.getAll();
+            return res.status(OK).send(patients);
+        } catch (error) {
+            routeErrorHandling(error, req, res);
+        }
+    }
     @Get(':id')
     private async get(req: ISecureRequest, res: Response) {
         try {
-            console.log(req.params);
             const questionnaire = await this.questionnaireService.getById(req.params.id);
             //here get questionnaire and send to response
             return res.status(OK).send(questionnaire);
