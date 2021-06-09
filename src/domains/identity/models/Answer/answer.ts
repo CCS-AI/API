@@ -14,9 +14,9 @@ const attributes = {
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
     },
-    questionnaireid: {
+    questionId: {
+        field: 'question_id',
         type: DataTypes.UUIDV4,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
     }
 };
@@ -26,11 +26,6 @@ const initAnswer = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'question',
         timestamps: true
-    });
-    Question.hasOne(Answer, {
-        foreignKey: 'id',
-        sourceKey: 'questionId',
-        as: 'questionId'
     });
 };
 

@@ -1,6 +1,8 @@
 export const createQuestionnaireResult = {
     additionalProperties: false,
-    properties: {},
-    required: [],
+    properties: {
+        data: { type: 'object' }
+    },
+    required: ['data'],
     type: 'object'
 };

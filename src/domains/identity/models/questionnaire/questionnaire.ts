@@ -11,6 +11,9 @@ const attributes = {
         primaryKey: true,
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
+    },
+    name: {
+        type: DataTypes.STRING
     }
 };
 

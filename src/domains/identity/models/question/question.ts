@@ -1,10 +1,9 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { Questionnaire } from '../questionnaire/questionnaire';
 
 class Question extends Model {
     public id: string;
     public name: string;
-    public questionnaireid: string;
+    public questionnaireId: string;
 }
 
 const attributes = {
@@ -14,9 +13,9 @@ const attributes = {
         defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
     },
-    questionnaireid: {
+    questionnaireId: {
+        field: 'questionnaire_id',
         type: DataTypes.UUIDV4,
-        defaultValue: Sequelize.literal('uuid_generate_v4()'),
         allowNull: false
     }
 };
@@ -26,11 +25,6 @@ const initQuestion = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'question',
         timestamps: true
-    });
-    Questionnaire.hasOne(Question, {
-        foreignKey: 'id',
-        sourceKey: 'questionnaireid',
-        as: 'questionnaireid'
     });
 };
 

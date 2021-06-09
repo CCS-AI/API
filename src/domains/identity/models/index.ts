@@ -5,3 +5,7 @@ export * from './patientMedicalFile/patientMedicalFile';
 export * from './organization/organization';
 export * from './examiner/examiner';
 export * from './examination/examination';
+export * from './Answer/answer';
+export * from './question/question';
+export * from './questionnaire/questionnaire';
+export * from './questionnaireResult/questionnaireResult';

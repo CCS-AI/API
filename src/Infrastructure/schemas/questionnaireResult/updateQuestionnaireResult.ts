@@ -1,8 +1,16 @@
 export const updateQuestionnaireResult = {
     additionalProperties: false,
     properties: {
-        id: { type: 'string' }
+        id: { type: 'string' },
+        data: {
+            additionalProperties: false,
+            properties: {
+                data: { type: 'object' }
+            },
+            type: 'object',
+            required: ['data']
+        }
     },
-    required: ['id'],
+    required: ['id', 'data'],
     type: 'object'
 };

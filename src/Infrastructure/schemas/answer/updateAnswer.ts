@@ -1,8 +1,17 @@
 export const updateAnswer = {
     additionalProperties: false,
     properties: {
-        id: { type: 'string' }
+        id: { type: 'string' },
+        data: {
+            additionalProperties: false,
+            properties: {
+                name: { type: 'string' },
+                questionId: { type: 'string' }
+            },
+            type: 'object',
+            required: ['name', 'questionId']
+        }
     },
-    required: ['id'],
+    required: ['id', 'data'],
     type: 'object'
 };
