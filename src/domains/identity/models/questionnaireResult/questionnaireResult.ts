@@ -3,7 +3,7 @@ type question = {
     name: string;
     answers: string[];
 };
-type questionnaireResult = Array<question>;
+export type questionnaireResult = Array<question>;
 
 class QuestionnaireResult extends Model {
     public id: string;

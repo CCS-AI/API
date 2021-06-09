@@ -71,6 +71,7 @@
         "tsyringe": "^4.3.0",
         "typescript": "^3.9.7",
         "winston-logzio": "^5.1.2",
+        "word-extractor": "^1.0.2",
         "xlsx": "^0.16.9"
     },
     "devDependencies": {

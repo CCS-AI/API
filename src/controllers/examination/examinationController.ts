@@ -11,6 +11,7 @@ import { MustAuth } from '../../Infrastructure/decorators/jwt';
 import routeErrorHandling from '../../Infrastructure/exceptions/routeErrorHandling';
 import { IUserService } from './../../domains/identity/services/userService';
 import { updateExamination } from '../../Infrastructure/schemas/examination/updateExamination';
+import { Examination } from '../../domains/identity/models';
 
 @injectable()
 @Controller('api/examination')
@@ -48,7 +49,8 @@ export class ExaminationController {
         try {
             if (await this.helpFunctions.checkPremission(req.payload.role, 'createExamination')) {
                 //here create examination and send to response
-                await this.examinationService.create(req.body);
+                const { pmfId, info, speechAudiometry, patientTestBackground, questionnaireResults } = req.body;
+                await this.examinationService.create({ pmfId, info, speechAudiometry, patientTestBackground } as Examination, questionnaireResults);
                 return res.status(OK).send('SUCCESS');
             } else {
                 return res.status(INTERNAL_SERVER_ERROR).send('You do not have permission to create a examination');

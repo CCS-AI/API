@@ -88,16 +88,19 @@
         "noEmit": false,
         "resolveJsonModule": true,
         "lib": ["es7", "dom", "esnext.asynciterable"],
-        "types": ["reflect-metadata"],
-        "typeRoots": ["./node_modules/@types"],
+        // "types": ["reflect-metadata"],
+        "typeRoots": ["node_modules/@types","types"],
         "baseUrl": ".",
         "esModuleInterop": true,
         "strict": false,
         "outDir": "./build",
-        "rootDir": "./src"
+        "rootDir": "./src",
+        "paths":{
+            "word-extractor": ["types/word-extractor"]
+        }
     },
     "include": ["src/"],
-    "exclude": ["node_modules", "./public", "build", "test"],
+    "exclude": ["node_modules", "./public", "build", "test","types"],
     "linterOptions": {
         "exclude": []
     }
