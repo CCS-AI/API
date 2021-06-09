@@ -42,6 +42,7 @@ class Examination extends Model {
     public info: Array<examResult>;
     public speechAudiometry: speechAudiometry;
     public patientTestBackground: string;
+    public questionnaireResultId: string;
 }
 
 const attributes = {
@@ -67,6 +68,10 @@ const attributes = {
     patientTestBackground: {
         field: 'patient_test_background',
         type: DataTypes.STRING
+    },
+    questionnaireResultId: {
+        field: 'questionnaire_result_id',
+        type: DataTypes.UUIDV4
     }
 };
 

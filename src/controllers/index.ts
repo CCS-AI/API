@@ -5,3 +5,8 @@ export * from './patient/patientMedicalFileConroller';
 export * from './examiner/examinerController';
 export * from './examination/examinationController';
 export * from './public/DocxController';
+export * from './question/questionController';
+export * from './questionnaire/questionnaireController';
+export * from './questionnaireResult/questionnaireResultController';
+export * from './answer/answerController';
+export * from './utils/HelpFunctions';

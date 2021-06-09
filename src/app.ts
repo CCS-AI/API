@@ -24,6 +24,10 @@ import EmailService from './Infrastructure/emailService/emailService';
 import fatalErrorHandling from './Infrastructure/exceptions/fatalErrorHandling';
 
 import { LogzioLogger } from './Infrastructure/logging/logzio';
+import QuestionnaireResultService from './domains/identity/services/questionnaireResultService';
+import QuestionnaireService from './domains/identity/services/questionnaireService';
+import QuestionService from './domains/identity/services/questionService';
+import AnswerService from './domains/identity/services/answerService';
 
 const upload = multer();
 
@@ -103,6 +107,18 @@ class App extends Server {
         });
         container.register('IExaminationService', {
             useClass: ExaminationService
+        });
+        container.register('IQuestionnaireResultService', {
+            useClass: QuestionnaireResultService
+        });
+        container.register('IQuestionnaireService', {
+            useClass: QuestionnaireService
+        });
+        container.register('IQuestionService', {
+            useClass: QuestionService
+        });
+        container.register('IAnswerService', {
+            useClass: AnswerService
         });
         // Helpers
         container.register('IHelpFunctions', {
