@@ -87,10 +87,10 @@ const initExamination = (sequelize: Sequelize): void => {
         foreignKey: 'pmfId',
         sourceKey: 'id'
     });
-    QuestionnaireResult.hasOne(Examination, {
+    Examination.hasOne(QuestionnaireResult, {
         as: 'questionnaireResults',
-        foreignKey: 'questionnaireResultId',
-        sourceKey: 'id'
+        foreignKey: 'id',
+        sourceKey: 'questionnaireResultId'
     });
 };
 
