@@ -50,7 +50,8 @@ class PatientMedicalFileService implements IPatientMedicalFileService {
                     model: Examination,
                     as: 'examinations'
                 }
-            ]
+            ],
+            order: [['examinations', 'createdAt', 'DESC']]
         });
         return pmf;
     }

@@ -8,7 +8,12 @@ export interface IHelpFunctions {
 class HelpFunctions implements IHelpFunctions {
     async checkPremission(role: string, action: string): Promise<boolean> {
         switch (action) {
-            case 'createPatient' || 'createExamination' || 'patients' || 'error' || 'home' || 'login': {
+            case 'createPatient':
+            case 'createExamination':
+            case 'patients':
+            case 'error':
+            case 'home':
+            case 'login': {
                 if (role == ('ADMIN' || 'EXAMINER' || 'ORGANIZATION_MANAGER')) {
                     return true;
                 }
