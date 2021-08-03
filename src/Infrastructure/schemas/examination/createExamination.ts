@@ -5,7 +5,8 @@ export const createExamination = {
         info: { type: 'array' },
         speechAudiometry: { type: 'object' },
         patientTestBackground: { type: 'string' },
-        questionnaireResults: { type: 'array' }
+        questionnaireResults: { type: 'array' },
+        summary: { type: 'string' }
     },
     required: ['pmfId', 'info'],
     type: 'object'
