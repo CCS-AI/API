@@ -1,4 +1,4 @@
-import { container } from 'tsyringe';
+import { container, injectable } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 import { Patient, PatientMedicalFile } from '../models';
@@ -13,7 +13,7 @@ export interface IPatientMedicalFileService {
     create(pmf: PatientMedicalFile): Promise<void>;
     update(pmfId: string, pmf: PatientMedicalFile): Promise<void>;
 }
-
+@injectable()
 class PatientMedicalFileService implements IPatientMedicalFileService {
     private userBounded: UserBounded;
     constructor() {
