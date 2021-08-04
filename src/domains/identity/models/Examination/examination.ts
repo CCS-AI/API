@@ -44,6 +44,9 @@ class Examination extends Model {
     public speechAudiometry: speechAudiometry;
     public patientTestBackground: string;
     public questionnaireResultId: string;
+    public ageOnCreate: number;
+    public examinerId: string;
+
 }
 
 const attributes = {
@@ -72,6 +75,14 @@ const attributes = {
     },
     questionnaireResultId: {
         field: 'questionnaire_result_id',
+        type: DataTypes.UUIDV4
+    },
+    ageOnCreate: {
+        field: 'age_on_create',
+        type: DataTypes.NUMBER
+    },
+    examinerId: {
+        field: 'examiner_id',
         type: DataTypes.UUIDV4
     }
 };
