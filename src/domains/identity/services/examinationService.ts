@@ -35,6 +35,7 @@ class ExaminationService implements IExaminationService {
     }
     async create(examination: Examination, questionnaireResults?: questionnaireResult): Promise<void> {
         const questionnaireResult = await QuestionnaireResult.create({ data: questionnaireResults });
+
         await Examination.create({ ...examination, questionnaireResultId: questionnaireResult.id });
     }
     async update(examinationId: string, examination: Examination): Promise<void> {
