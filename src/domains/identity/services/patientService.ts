@@ -1,8 +1,10 @@
-import { container } from 'tsyringe';
+import { MustAuth } from 'src/Infrastructure/decorators/jwt';
+import { container, inject } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 import { Patient, PatientMedicalFile } from '../models';
 import UserBounded from '../models/user/userBounded';
+import { IPatientMedicalFileService } from './patientMedicalFileService';
 
 export interface IPatientService {
     getById(patientId: string): Promise<Patient | null>;
@@ -10,15 +12,25 @@ export interface IPatientService {
     getAll(): Promise<Patient[] | null>;
     create(patient: Patient): Promise<void>;
     update(patientId: string, patient: Patient): Promise<void>;
+    getByPmfId(pmfid: string): Promise<Patient | null>;
 }
 
+//@injectable()
 class PatientService implements IPatientService {
     private userBounded: UserBounded;
+    private PatientMedicalFileService: IPatientMedicalFileService;
     constructor() {
+        this.PatientMedicalFileService = container.resolve<IPatientMedicalFileService>('IPatientMedicalFileService');
         this.userBounded = container.resolve<UserBounded>('UserBounded');
     }
     async getById(patientId: string): Promise<Patient | null> {
         const patient = await Patient.findOne({ where: { id: patientId, organizationId: this.userBounded.orgId } });
+        return patient;
+    }
+    async getByPmfId(pmfid: string): Promise<Patient | null> {
+        const pmf = await this.PatientMedicalFileService.getById(pmfid);
+        const patientId = pmf?.patientId;
+        const patient = await Patient.findOne({ where: { id: patientId } });
         return patient;
     }
     async getByEmail(email: string): Promise<Patient | null> {

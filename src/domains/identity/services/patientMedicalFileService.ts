@@ -1,9 +1,10 @@
-import { container } from 'tsyringe';
+import { container, injectable } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 import { Patient, PatientMedicalFile } from '../models';
 import UserBounded from '../models/user/userBounded';
 import { Examination } from '../models/examination/examination';
+import { MustAuth } from 'src/Infrastructure/decorators/jwt';
 
 export interface IPatientMedicalFileService {
     getById(pmfId: string): Promise<PatientMedicalFile | null>;
@@ -13,6 +14,7 @@ export interface IPatientMedicalFileService {
     create(pmf: PatientMedicalFile): Promise<void>;
     update(pmfId: string, pmf: PatientMedicalFile): Promise<void>;
 }
+
 
 class PatientMedicalFileService implements IPatientMedicalFileService {
     private userBounded: UserBounded;
