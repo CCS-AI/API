@@ -3,7 +3,7 @@ import { container, inject } from 'tsyringe';
 import { QuestionnaireResult } from '../models';
 import { Examination } from '../models/examination/examination';
 import { IUserService } from './userService';
-import PatientService from './patientService';
+import PatientService, { IPatientService } from './patientService';
 import { Patient } from '../models';
 
 export interface IExaminationService {
@@ -16,8 +16,10 @@ export interface IExaminationService {
 
 class ExaminationService implements IExaminationService {
     private userService: IUserService;
-    constructor(@inject('PatientService') private PatientService: PatientService) {
+    private PatientService: IPatientService;
+    constructor() {
         this.userService = container.resolve<IUserService>('IUserService');
+        this.PatientService = container.resolve<IPatientService>('IPatientService');
     }
     async getAllByPmf(pmfId: string): Promise<Examination[] | null> {
         const examinations = await Examination.findAll({ where: { pmfId } });
