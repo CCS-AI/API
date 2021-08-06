@@ -1,3 +1,4 @@
+import { patientFilter } from './../../Infrastructure/schemas/patient/patientFilter';
 import { IHelpFunctions } from './../utils/helpFunctions';
 import { IPatientService } from './../../domains/identity/services/patientService';
 import { updatePatient } from './../../Infrastructure/schemas/patient/updatePatient';
@@ -22,11 +23,12 @@ export class PatientController {
         @inject('IHelpFunctions') private helpFunctions: IHelpFunctions
     ) {}
 
-    @Get('all')
+    @Post('all')
+    @ValidateBody(patientFilter)
     private async getAll(req: ISecureRequest, res: Response) {
         try {
             //here getAll patient and send to response
-            const patients = await this.patientService.getAll();
+            const patients = await this.patientService.getAll(req.body.filter);
             return res.status(OK).send(patients);
         } catch (error) {
             routeErrorHandling(error, req, res);

@@ -1,15 +1,13 @@
-import { MustAuth } from 'src/Infrastructure/decorators/jwt';
 import { container, inject } from 'tsyringe';
-import { User } from '../models/user/user';
-import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
 import { Patient, PatientMedicalFile } from '../models';
 import UserBounded from '../models/user/userBounded';
 import { IPatientMedicalFileService } from './patientMedicalFileService';
+import { baseFilterType as filterType, IPatientFilterService } from './patientFilterService';
 
 export interface IPatientService {
     getById(patientId: string): Promise<Patient | null>;
     getByEmail(email: string): Promise<Patient | null>;
-    getAll(): Promise<Patient[] | null>;
+    getAll(filter: filterType): Promise<Patient[]>;
     create(patient: Patient): Promise<void>;
     update(patientId: string, patient: Patient): Promise<void>;
     getByPmfId(pmfid: string): Promise<Patient | null>;
@@ -19,8 +17,10 @@ export interface IPatientService {
 class PatientService implements IPatientService {
     private userBounded: UserBounded;
     private PatientMedicalFileService: IPatientMedicalFileService;
+    private patientFilterService: IPatientFilterService;
     constructor() {
         this.PatientMedicalFileService = container.resolve<IPatientMedicalFileService>('IPatientMedicalFileService');
+        this.patientFilterService = container.resolve<IPatientFilterService>('IPatientFilterService');
         this.userBounded = container.resolve<UserBounded>('UserBounded');
     }
     async getById(patientId: string): Promise<Patient | null> {
@@ -37,9 +37,8 @@ class PatientService implements IPatientService {
         const patient = await Patient.findOne({ where: { email, organizationId: this.userBounded.orgId } });
         return patient;
     }
-    async getAll(): Promise<Patient[] | null> {
-        const patients = await Patient.findAll({ where: { organizationId: this.userBounded.orgId } });
-        return patients;
+    async getAll(filter: filterType): Promise<Patient[]> {
+        return await this.patientFilterService.getPatientsByFilter({ ...filter, organizationId: this.userBounded.orgId });
     }
     async create(patient: Patient): Promise<void> {
         const created = await Patient.create({ ...patient, organizationId: this.userBounded.orgId });

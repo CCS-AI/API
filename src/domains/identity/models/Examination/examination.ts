@@ -2,7 +2,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 import { QuestionnaireResult } from '../questionnaireResult/questionnaireResult';
 
-type examinationType = 'AC' | 'AC+MASK' | 'BC' | 'BC+MASK' | 'WEBER' | 'FF' | 'STENGER';
+export type examinationType = 'AC' | 'AC+MASK' | 'BC' | 'BC+MASK' | 'WEBER' | 'FF' | 'STENGER';
 
 type sp = {
     Rt: number; // between 0-120
@@ -46,7 +46,6 @@ class Examination extends Model {
     public questionnaireResultId: string;
     public ageOnCreate: number;
     public examinerId: string;
-
 }
 
 const attributes = {
@@ -62,12 +61,12 @@ const attributes = {
         allowNull: false
     },
     info: {
-        type: DataTypes.JSON,
+        type: DataTypes.JSONB,
         allowNull: false
     },
     speechAudiometry: {
         field: 'speech_audiometry',
-        type: DataTypes.JSON
+        type: DataTypes.JSONB
     },
     patientTestBackground: {
         field: 'patient_test_background',

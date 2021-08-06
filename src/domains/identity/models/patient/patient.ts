@@ -1,12 +1,12 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 
-enum Gender {
+export enum Gender {
     MALE = 1,
     FEMALE
 }
 
-enum HMO {
+export enum HMO {
     CLALIT = 1,
     MACABI,
     LEUMIT
@@ -25,6 +25,8 @@ class Patient extends Model {
     public hmo: HMO;
     public organizationId: string;
     public personalId: string;
+    public createdAt: Date;
+    public updatedAt: Date;
 }
 
 const attributes = {
@@ -79,6 +81,11 @@ const initPatient = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'patients',
         timestamps: true
+    });
+    Patient.hasOne(PatientMedicalFile, {
+        foreignKey: 'patientId',
+        sourceKey: 'id',
+        as: 'pmf'
     });
     PatientMedicalFile.hasOne(Patient, {
         foreignKey: 'id',

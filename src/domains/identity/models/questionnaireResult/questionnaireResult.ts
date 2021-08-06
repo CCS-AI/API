@@ -18,7 +18,7 @@ const attributes = {
         allowNull: false
     },
     data: {
-        type: DataTypes.JSON
+        type: DataTypes.JSONB
     }
 };
 

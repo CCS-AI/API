@@ -28,6 +28,7 @@ import QuestionnaireResultService from './domains/identity/services/questionnair
 import QuestionnaireService from './domains/identity/services/questionnaireService';
 import QuestionService from './domains/identity/services/questionService';
 import AnswerService from './domains/identity/services/answerService';
+import PatientFilterService from './domains/identity/services/patientFilterService';
 
 const upload = multer();
 
@@ -98,6 +99,9 @@ class App extends Server {
         });
         container.register('IPatientService', {
             useClass: PatientService
+        });
+        container.register('IPatientFilterService', {
+            useClass: PatientFilterService
         });
         container.register('IPatientMedicalFileService', {
             useClass: PatientMedicalFileService
