@@ -14,8 +14,6 @@ export type baseFilterType = {
         gender: Gender;
         yearOfBirth: number;
         examinationDate: Date;
-        ageOnCreate: number;
-        examiner: string;
         hmo: HMO;
     };
     examinationResult?: {
@@ -24,6 +22,8 @@ export type baseFilterType = {
         type: examinationType;
         operation: '<' | '>' | '=';
         operationNumber: number;
+        ageOnCreate: number;
+        examiner: string;
     };
 };
 export interface IPatientFilterService {
