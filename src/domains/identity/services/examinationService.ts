@@ -1,6 +1,7 @@
+import { Sequelize } from 'sequelize';
 import { questionnaireResult } from './../models/questionnaireResult/questionnaireResult';
 import { container, inject } from 'tsyringe';
-import { QuestionnaireResult } from '../models';
+import { Examiner, QuestionnaireResult, User } from '../models';
 import { Examination } from '../models/examination/examination';
 import { IUserService } from './userService';
 import PatientService, { IPatientService } from './patientService';
@@ -32,10 +33,32 @@ class ExaminationService implements IExaminationService {
                 {
                     model: QuestionnaireResult,
                     as: 'questionnaireResults'
+                },
+                {
+                    model: Examiner,
+                    as: 'examiner',
+                    attributes: ['licenseNumber'],
+                    include: [
+                        {
+                            model: User,
+                            as: 'user',
+                            required: true,
+                            attributes: ['email', 'firstName', 'lastName']
+                        }
+                    ]
                 }
             ]
         });
-        return examination;
+        if (!examination) return null;
+        return {
+            ...examination.get(),
+            examiner: examination.get().examiner
+                ? {
+                      licenseNumber: examination.get().examiner?.get().licenseNumber,
+                      ...examination.get().examiner?.get().user?.get()
+                  }
+                : null
+        };
     }
     public ageFromDateOfBirthday(dateOfBirth: any): number {
         const today = new Date();

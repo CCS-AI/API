@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { User } from '../user/user';
 
 class Examiner extends Model {
     public id: string;
@@ -29,6 +30,11 @@ const initExaminer = (sequelize: Sequelize): void => {
         sequelize,
         tableName: 'examiner',
         timestamps: true
+    });
+    Examiner.hasOne(User, {
+        foreignKey: 'id',
+        sourceKey: 'userId',
+        as: 'user'
     });
 };
 

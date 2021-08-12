@@ -1,4 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Examiner } from '../examiner/examiner';
 import { PatientMedicalFile } from '../patientMedicalFile/patientMedicalFile';
 import { QuestionnaireResult } from '../questionnaireResult/questionnaireResult';
 
@@ -43,6 +44,7 @@ class Examination extends Model {
     public info: Array<examResult>;
     public speechAudiometry: speechAudiometry;
     public patientTestBackground: string;
+    public summary: string;
     public questionnaireResultId: string;
     public ageOnCreate: number;
     public examinerId: string;
@@ -70,6 +72,9 @@ const attributes = {
     },
     patientTestBackground: {
         field: 'patient_test_background',
+        type: DataTypes.STRING
+    },
+    summary: {
         type: DataTypes.STRING
     },
     questionnaireResultId: {
@@ -101,6 +106,11 @@ const initExamination = (sequelize: Sequelize): void => {
         as: 'questionnaireResults',
         foreignKey: 'id',
         sourceKey: 'questionnaireResultId'
+    });
+    Examination.hasOne(Examiner, {
+        as: 'examiner',
+        foreignKey: 'id',
+        sourceKey: 'examinerId'
     });
 };
 

@@ -1,3 +1,4 @@
+import { Sequelize } from 'sequelize';
 import { container } from 'tsyringe';
 import { User } from '../models/user/user';
 import { filterType, rangeType, sortType } from '../../../controllers/admin/utils/index';
@@ -27,7 +28,22 @@ class ExaminerService implements IExaminerService {
         return examiner;
     }
     async getAll(): Promise<Examiner[] | null> {
-        const examiners = await Examiner.findAll();
+        const examiners = await Examiner.findAll({
+            attributes: [
+                ...Object.keys(Examiner.rawAttributes),
+                [Sequelize.col('user.email'), 'email'],
+                [Sequelize.col('user.first_name'), 'firstName'],
+                [Sequelize.col('user.last_name'), 'lastName']
+            ],
+            include: [
+                {
+                    model: User,
+                    as: 'user',
+                    required: true,
+                    attributes: []
+                }
+            ]
+        });
         return examiners;
     }
     async create(examiner: Examiner): Promise<void> {
