@@ -73,7 +73,7 @@ class PatientFilterService implements IPatientFilterService {
             where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
-            where['$pmf.examinations.data$'] = { [Op.eq]: examinationResult };
+            where['$pmf.examinations.info$'] = examinationResult;
         }
         return where;
     }
