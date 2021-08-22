@@ -74,7 +74,7 @@ class PatientFilterService implements IPatientFilterService {
             where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
-            where['$pmf.examinations.info$'] = { [Op.contains]: examinationResult };
+            where['$pmf.examinations.info$'] = examinationResult;
         }
         return where;
     }
