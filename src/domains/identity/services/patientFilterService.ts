@@ -1,4 +1,4 @@
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 import { PatientMedicalFile } from '../models';
 import { Examination, examinationType } from './../models/examination/examination';
 import { HMO, Gender, Patient } from './../models/patient/patient';
@@ -12,11 +12,11 @@ export type baseFilterType = {
     questionnaireResult?: questionnaireResult;
     patientDetails?: {
         gender: Gender;
-        yearOfBirth: number;
-        examinationDate: Date;
+        yearOfBirth: number; // problem
         hmo: HMO;
     };
     examinationResult?: {
+        examinationDate: Date;
         frequency1: number;
         frequency2: number;
         type: examinationType;
@@ -68,13 +68,17 @@ class PatientFilterService implements IPatientFilterService {
         }
 
         if (patientDetails) {
+            console.log(patientDetails);
             where.gender = patientDetails.gender;
-            where.birth = patientDetails.yearOfBirth;
-            where['$pmf.examinations.createdAt$'] = patientDetails.examinationDate;
+            // where.$and =Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('dateField')),2020); ---
             where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
-            where['$pmf.examinations.info$'] = examinationResult;
+            console.log(examinationResult);
+            // where['$pmf.examinations.createdAt$'] = examinationResult.examinationDate; -- same problem of patient date
+            //where['$pmf.examinations.info.type$'] = { [Op.contains]: examinationResult.type };
+            where['$pmf.examinations.examiner_id$'] = examinationResult.examiner;
+            where['$pmf.examinations.age_on_create$'] = examinationResult.ageOnCreate;
         }
         return where;
     }
