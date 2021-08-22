@@ -26,6 +26,7 @@ export type baseFilterType = {
         examiner: string;
     };
 };
+
 export interface IPatientFilterService {
     getPatientsByFilter(filter: filterType): Promise<Patient[]>;
 }
@@ -68,12 +69,12 @@ class PatientFilterService implements IPatientFilterService {
 
         if (patientDetails) {
             where.gender = patientDetails.gender;
-            where.yearOfBirth = patientDetails.yearOfBirth;
-            where.examinationDate = patientDetails.examinationDate;
+            where.birth = patientDetails.yearOfBirth;
+            where['$pmf.examinations.createdAt$'] = patientDetails.examinationDate;
             where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
-            where['$pmf.examinations.info$'] = examinationResult;
+            where['$pmf.examinations.info$'] = { [Op.contains]: examinationResult };
         }
         return where;
     }
