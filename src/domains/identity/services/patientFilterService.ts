@@ -65,8 +65,12 @@ class PatientFilterService implements IPatientFilterService {
             const containAnswers = questionnaireResult.filter((result) => result?.answers?.length);
             if (containAnswers.length) where['$pmf.examinations.questionnaireResults.data$'] = { [Op.contains]: JSON.stringify(containAnswers) };
         }
+
         if (patientDetails) {
-            where['$data$'] = { [Op.eq]: patientDetails };
+            where.gender = patientDetails.gender;
+            where.yearOfBirth = patientDetails.yearOfBirth;
+            where.examinationDate = patientDetails.examinationDate;
+            where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
             where['$pmf.examinations.data$'] = { [Op.eq]: examinationResult };
