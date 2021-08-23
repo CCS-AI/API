@@ -12,16 +12,16 @@ export type baseFilterType = {
     questionnaireResult?: questionnaireResult;
     patientDetails?: {
         gender: Gender;
-        yearOfBirth: number; // problem
+        yearOfBirth: number; //TODO - implement
         hmo: HMO;
     };
     examinationResult?: {
         examinationDate: Date;
-        frequency1: number;
-        frequency2: number;
-        type: examinationType;
-        operation: '<' | '>' | '=';
-        operationNumber: number;
+        frequency1: number; //TODO - implement
+        frequency2: number; //TODO - implement
+        type: examinationType; //TODO - implement
+        operation: '<' | '>' | '='; //TODO - implement
+        operationNumber: number; //TODO - implement
         ageOnCreate: number;
         examiner: string;
     };
@@ -68,17 +68,13 @@ class PatientFilterService implements IPatientFilterService {
         }
 
         if (patientDetails) {
-            console.log(patientDetails);
-            where.gender = patientDetails.gender;
-            // where.$and =Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('dateField')),2020); ---
-            where.hmo = patientDetails.hmo;
+            if (patientDetails.gender) where.gender = patientDetails.gender;
+            if (patientDetails.hmo) where.hmo = patientDetails.hmo;
         }
         if (examinationResult) {
-            console.log(examinationResult);
-            // where['$pmf.examinations.createdAt$'] = examinationResult.examinationDate; -- same problem of patient date
-            //where['$pmf.examinations.info.type$'] = { [Op.contains]: examinationResult.type };
-            where['$pmf.examinations.examiner_id$'] = examinationResult.examiner;
-            where['$pmf.examinations.age_on_create$'] = examinationResult.ageOnCreate;
+            if (examinationResult.examinationDate) where['$pmf.examinations.createdAt$'] = examinationResult.examinationDate;
+            if (examinationResult.examiner) where['$pmf.examinations.examiner_id$'] = examinationResult.examiner;
+            if (examinationResult.ageOnCreate) where['$pmf.examinations.age_on_create$'] = examinationResult.ageOnCreate;
         }
         return where;
     }
