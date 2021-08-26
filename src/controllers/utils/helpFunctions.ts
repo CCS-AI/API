@@ -14,13 +14,13 @@ class HelpFunctions implements IHelpFunctions {
             case 'error':
             case 'home':
             case 'login': {
-                if (role == ('ADMIN' || 'EXAMINER' || 'ORGANIZATION_MANAGER')) {
+                if (['ADMIN', 'EXAMINER', 'ORGANIZATION_MANAGER'].includes(role)) {
                     return true;
                 }
                 break;
             }
             case 'registerExaminer': {
-                if (role == ('ADMIN' || 'ORGANIZATION_MANAGER')) {
+                if (['ADMIN', 'ORGANIZATION_MANAGER'].includes(role)) {
                     return true;
                 }
                 break;

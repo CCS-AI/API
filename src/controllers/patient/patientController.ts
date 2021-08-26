@@ -49,7 +49,7 @@ export class PatientController {
     private async create(req: ISecureRequest, res: Response) {
         try {
             //here create patient and send to response
-            if (await this.helpFunctions.checkPremission(req.payload.role, 'createPatient')) {
+            if (this.helpFunctions.checkPremission(req.payload.role, 'createPatient')) {
                 await this.patientService.create(req.body);
                 return res.status(OK).send('SUCCESS');
             } else {
